@@ -1,0 +1,11 @@
+order_id,courier,source_city,destination_city,delivery_days,weight_kg,delivered_on_time
+1001,BlueDart,Mumbai,Pune,1,2.5,Yes
+1002,EcomExpress,Delhi,Jaipur,2,1.2,Yes
+1003,DTDC,Bangalore,Chennai,3,3.4,No
+1004,Delhivery,Pune,Hyderabad,2,2.1,Yes
+1005,BlueDart,Delhi,Chandigarh,4,5.0,No
+1006,EcomExpress,Mumbai,Nagpur,1,0.8,Yes
+1007,DTDC,Surat,Mumbai,2,1.7,Yes
+1008,Delhivery,Delhi,Kolkata,5,3.9,No
+1009,BlueDart,Jaipur,Ahmedabad,1,2.3,Yes
+1010,EcomExpress,Pune,Mumbai,2,1.1,Yes
