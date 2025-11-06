@@ -72,13 +72,6 @@ jobs:
             - name: Install dependencies
               run: pip install -r requirements.txt
             
-            # Download transformed data
-            - name: Download transformed data
-              uses: actions/download-artifact@v4
-              with:
-                name: final-output
-                path: data/
-            
             # Step 4: Run Load
             - name: run load
               run: python scripts/load.py
