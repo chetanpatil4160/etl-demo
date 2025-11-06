@@ -4,7 +4,6 @@ import csv
 df = pd.read_csv("data/delivery_data.csv")
 
 #Avg Delivery Days
-
 avg_days = df["delivery_days"].mean()
 
 
