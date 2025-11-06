@@ -6,8 +6,31 @@ on:
             - main
 
 jobs:
-    run-etl:
+    extract-data:
         runs-on: ubuntu-latest
+        steps:
+            #Step1 checkout repositry
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            # Step 2: Setup Python
+            - name: Set up python
+              uses: actions/setup-python@v5
+              with:
+                python-version: '3.10'
+            
+             # Step 3: Install dependencies
+            - name: Install dependencies
+              run: pip install -r requirements.txt
+
+            # Step 4: Run Extract
+            - name: run extract
+              run: python scripts/extract.py
+
+
+    transform-data:
+        runs-on: ubuntu-latest
+        needs: extract-data
     
         steps:
 
@@ -18,22 +41,44 @@ jobs:
 
             # Step 2: Setup Python
             - name: Set up python
-              uses: actions/setup-python@v6
+              uses: actions/setup-python@v5
               with:
                 python-version: '3.10'
             
-             # Step 3: Install dependencies
+            # Step 3: Install dependencies
             - name: Install dependencies
               run: pip install -r requirements.txt
-
-             # Step 4: Run Extract
-            - name: run extract
-              run: python scripts/extract.py
 
             # Step 4: Run Transfrom
             - name: run transform
               run: python scripts/transform.py
+    
+    load-data:
+        runs-on: ubuntu-latest
+        needs: transform-data
+    
+        steps:
+            #Step1 checkout repositry
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            # Step 2: Setup Python
+            - name: Set up python
+              uses: actions/setup-python@v5
+              with:
+                python-version: '3.10'
+            
+            # Step 3: Install dependencies
+            - name: Install dependencies
+              run: pip install -r requirements.txt
+            
+            # Download transformed data
+            - name: Download transformed data
+              uses: actions/download-artifact@v4
+              with:
+                name: final-output
+                path: data/
             
             # Step 4: Run Load
-            - name: run transform
+            - name: run load
               run: python scripts/load.py
